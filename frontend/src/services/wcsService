@@ -1,0 +1,14 @@
+// src/services/wcsService.js
+export async function getWCSExplanation(payload) {
+  const res = await fetch("http://localhost:8000/api/wcs", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error("API call failed");
+  }
+
+  return res.json();
+}
