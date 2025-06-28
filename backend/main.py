@@ -16,7 +16,7 @@ app = FastAPI()
 # ✅ CORS fix: allow specific origin (React Vite frontend)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # react dev server
+    allow_origins=["http://localhost:5174"],  # react dev server
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -215,7 +215,9 @@ async def calc_ofdm(inp: OFDMInput):
 
     explanation = call_openai("OFDM", inp.dict(), numbers)
     return {"numbers": numbers, "explanation": explanation}
-
+@app.get("/")
+async def root():
+    return {"message": "Backend is up and running!"}
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
